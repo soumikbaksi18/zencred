@@ -49,7 +49,7 @@
     "@types/chai": "^4.2.0",
     "@types/mocha": "^10.0.6",
     "chai": "^4.2.0",
-    "ethers": "^5.4.7",
+    "ethers": "^5.7.2",
     "hardhat": "^2.12.7",
     "hardhat-gas-reporter": "^1.0.8",
     "solidity-coverage": "^0.8.1",

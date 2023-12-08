@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../components/Navbar";
+
 import hero1 from "../assets/herobox1.svg";
 import hero2 from "../assets/herobox2.svg";
 import hero3 from "../assets/herobox3.svg";
@@ -11,10 +11,6 @@ import Events from "../components/Events";
 const Home = () => {
   return (
     <>
-      <div>
-        <Navbar />
-      </div>
-
       <div>
         <div className="hero flex justify-between mt-16 mx-20">
           <div className="w-1/2 ">
