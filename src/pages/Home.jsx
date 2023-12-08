@@ -6,6 +6,7 @@ import hero3 from '../assets/herobox3.svg';
 import c1 from "../assets/cutie1.svg";
 import c2 from "../assets/cutie2.svg";
 import hand from "../assets/hand.svg";
+import Events from "../components/Events";
 
 const Home = () => {
   return (
@@ -58,6 +59,10 @@ const Home = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      <div>
+        <Events/>
       </div>
     </>
   );
