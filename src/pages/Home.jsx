@@ -1,8 +1,8 @@
 import React from "react";
 import Navbar from "../components/Navbar";
-import hero1 from '../assets/herobox1.svg';
-import hero2 from '../assets/herobox2.svg';
-import hero3 from '../assets/herobox3.svg';
+import hero1 from "../assets/herobox1.svg";
+import hero2 from "../assets/herobox2.svg";
+import hero3 from "../assets/herobox3.svg";
 import c1 from "../assets/cutie1.svg";
 import c2 from "../assets/cutie2.svg";
 import hand from "../assets/hand.svg";
@@ -62,7 +62,23 @@ const Home = () => {
       </div>
 
       <div>
-        <Events/>
+        <Events />
+      </div>
+
+      <div className="mb-6">
+        <div className="flex flex-row justify-center text-5xl font-medium tracking-wide font-poppins mb-3">
+          <h1>Elevating moments,</h1>
+          <img src={c1} className="w-24 mx-3" />
+          <h1 className="text-blue-800">Diminishing Carbon Footprint</h1>
+        </div>
+
+        <div className="flex iems-center justify-center text-5xl font-medium tracking-wide font-poppins mb-3">
+          <h1>— where celebrations meet sustainability At</h1>
+        </div>
+
+        <div className="flex iems-center justify-center text-5xl font-medium tracking-wide font-poppins">
+          <h2>ETHIndia✨</h2>
+        </div>
       </div>
     </>
   );
