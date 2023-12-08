@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { ethers } from "ethers";
 
 import hero1 from "../assets/herobox1.svg";
 import hero2 from "../assets/herobox2.svg";
@@ -8,7 +9,53 @@ import c2 from "../assets/cutie2.svg";
 import hand from "../assets/hand.svg";
 import Events from "../components/Events";
 
+// ABIs
+import TokenMaster from "../abis/TokenMaster.json";
+
+// Config
+import config from "../config.json";
+
 const Home = () => {
+  const [tokenMaster, setTokenMaster] = useState(null);
+  const [occasions, setOccasions] = useState([]);
+  const [provider, setProvider] = useState(null);
+  const [occasion, setOccasion] = useState({});
+  const [toggle, setToggle] = useState(false);
+  const [account, setAccount] = useState(null);
+  const loadBlockchainData = async () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    setProvider(provider);
+
+    const network = await provider.getNetwork();
+    const tokenMaster = new ethers.Contract(
+      config[network.chainId].TokenMaster.address,
+      TokenMaster,
+      provider
+    );
+    setTokenMaster(tokenMaster);
+
+    const totalOccasions = await tokenMaster.totalOccasions();
+    const occasions = [];
+
+    for (var i = 1; i <= totalOccasions; i++) {
+      const occasion = await tokenMaster.getOccasion(i);
+      occasions.push(occasion);
+    }
+
+    setOccasions(occasions);
+
+    window.ethereum.on("accountsChanged", async () => {
+      const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      });
+      const account = ethers.utils.getAddress(accounts[0]);
+      setAccount(account);
+    });
+  };
+
+  useEffect(() => {
+    loadBlockchainData();
+  }, []);
   return (
     <>
       <div>
@@ -58,7 +105,13 @@ const Home = () => {
       </div>
 
       <div>
-        <Events />
+        <Events
+          occasions={occasions}
+          setOccasion={setOccasion}
+          tokenMaster={tokenMaster}
+          provider={provider}
+          account={account}
+        />
       </div>
 
       <div className="mb-6">
