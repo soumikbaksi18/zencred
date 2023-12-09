@@ -13,7 +13,7 @@ import Card from "./components/Card";
 import SeatChart from "./components/SeatChart";
 import Dashboard from "./components/Dashboard";
 import Navbar from "./components/Navbar";
-import Ticket from "./pages/Ticket";
+import Carbon from "./pages/Carbon";
 
 // ABIs
 import TokenMaster from "./abis/TokenMaster.json";
@@ -30,6 +30,8 @@ import c2 from "./assets/cutie2.svg";
 import hand from "./assets/hand.svg";
 
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
+import Carbon2 from "./pages/Carbon2";
+
 
 function App({ anonAadhaarProvider }) {
   const [provider, setProvider] = useState(null);
@@ -187,7 +189,15 @@ function App({ anonAadhaarProvider }) {
           path="/dashboard"
           element={<Dashboard userAddress={account} contract={tokenMaster} />}
         />
-        <Route path="/ticket" element={<Ticket />} />
+        <Route
+          path="/carbon"
+          element={<Carbon />}
+        />
+        <Route
+          path="/carbon2"
+          element={<Carbon2 />}
+        />
+        
       </Routes>
     </div>
   );

@@ -68,66 +68,69 @@ const Carbon = ({ discountEligible, setDiscountCoupon }) => {
   };
   return (
     <>
-        <div className="section">
-      <div className="calculator-bg2">
-        <div className="p-6">
-          <h1 className={`p-2 `}>Weight of Cargo</h1>
-          <div className="flex relative">
-            <input
-              className="input-field p-6 mr-2"
-              type="number"
-              value={weightInput}
-              onChange={handleWeightChange}
-            />
-            <h2 className="flex-end ml-2">Kg</h2>
+      <div className="flex justify-center">
+        <div className="section flex flex-col">
+          <div className="calculator-bg2">
+            <div className="p-6">
+              <h1 className={`p-2 `}>Weight of Cargo</h1>
+              <div className="flex relative">
+                <input
+                  className="input-field p-6 mr-2"
+                  type="number"
+                  value={weightInput}
+                  onChange={handleWeightChange}
+                />
+                <h2 className="flex-end ml-2">Kg</h2>
+              </div>
+            </div>
+
+            <div className="p-6">
+              <h1 className={` p-2 `}>Distance Covered</h1>
+              <div className="flex relative">
+                <input
+                  className="input-field p-6 mr-2"
+                  type="number"
+                  value={distanceInput}
+                  onChange={handleDistanceChange}
+                />
+                <h2 className="flex-end">Km</h2>
+              </div>
+            </div>
+
+            <div className="p-6 mt-5">
+              <button className="calculate" onClick={handleCalculateClick}>
+                <h3 className={` p-2 `}>Calculate</h3>
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <div className="output mt-10">
+              <div className="output-field flex relative ">
+                <h2 className={` text-lg p-6`}>
+                  Your Carbon offset is:
+                  <p className="text-2xl text-black">
+                    {carbonOffset && <p>{carbonOffset}</p>}
+                  </p>
+                </h2>
+                <h3 className="flex-end ">
+                  Kg
+                </h3>
+              </div>
+            </div>
+            {discountCoupon && (
+              <div className="mt-4">
+                <h3 className="text-green-500">
+                  Congratulations! You've got a discount:
+                </h3>
+                <p className="text-2xl">{discountCoupon}</p>
+              </div>
+            )}
           </div>
         </div>
-
-        <div className="p-6">
-          <h1 className={` p-2 `}>Distance Covered</h1>
-          <div className="flex relative">
-            <input
-              className="input-field p-6 mr-2"
-              type="number"
-              value={distanceInput}
-              onChange={handleDistanceChange}
-            />
-            <h2 className="flex-end">
-              Km
-            </h2>
-          </div>
-        </div>
-
-        <div className="p-6 mt-5">
-          <button className="calculate" onClick={handleCalculateClick}>
-            <h3 className={` p-2 `}>Calculate</h3>
-          </button>
-        </div>
       </div>
-
-      <div className="output mt-10">
-        <div className="output-field flex relative ">
-          <h2 className={` text-lg p-6`}>
-            Your Carbon offset is:
-            <p className="text-2xl flex-end text-black">{carbonOffset && <p>{carbonOffset}</p>}</p>
-          </h2>
-
-          <h3 className="absolute right-2 pt-10 mr-8 text-white text-2xl font-semibold">
-            Kg
-          </h3>
-        </div>
-      </div>
-      {discountCoupon && (
-        <div className="mt-4">
-          <h3 className="text-green-500">
-            Congratulations! You've got a discount:
-          </h3>
-          <p className="text-2xl">{discountCoupon}</p>
-        </div>
-      )}
-    </div>
     </>
-  )
-}
+  );
+};
 
-export default Carbon
+export default Carbon;
