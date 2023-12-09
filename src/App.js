@@ -137,21 +137,6 @@ function App({ anonAadhaarProvider }) {
                   </div>
                 </div>
 
-                {anonAadhaarProvider}
-                <div className="center">
-                  <LogInWithAnonAadhaar />
-                  <p>{anonAadhaar?.status}</p>
-                </div>
-                <div className="center">
-                  {anonAadhaar?.status === "logged-in" && (
-                    <>
-                      <p>✅ Proof is valid</p>
-                      <AnonAadhaarProof
-                        code={JSON.stringify(anonAadhaar.pcd, null, 2)}
-                      />
-                    </>
-                  )}
-                </div>
                 <div className="cards grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-20 mx-36">
                   {occasions.map((occasion, index) => (
                     <Card
@@ -169,12 +154,30 @@ function App({ anonAadhaarProvider }) {
                 </div>
 
                 {toggle && (
-                  <SeatChart
-                    occasion={occasion}
-                    tokenMaster={tokenMaster}
-                    provider={provider}
-                    setToggle={setToggle}
-                  />
+                  <div className="anon">
+                    {anonAadhaarProvider}
+                    <div className="center">
+                      <LogInWithAnonAadhaar />
+                      <p>{anonAadhaar?.status}</p>
+                    </div>
+                    <div className="center">
+                      {anonAadhaar?.status === "logged-in" && (
+                        <>
+                          <p>✅ Proof is valid</p>
+                          <AnonAadhaarProof
+                            code={JSON.stringify(anonAadhaar.pcd, null, 2)}
+                          />
+
+                          <SeatChart
+                            occasion={occasion}
+                            tokenMaster={tokenMaster}
+                            provider={provider}
+                            setToggle={setToggle}
+                          />
+                        </>
+                      )}
+                    </div>
+                  </div>
                 )}
               </div>
             </>
@@ -184,10 +187,7 @@ function App({ anonAadhaarProvider }) {
           path="/dashboard"
           element={<Dashboard userAddress={account} contract={tokenMaster} />}
         />
-         <Route
-          path="/ticket"
-          element={<Ticket />}
-        />
+        <Route path="/ticket" element={<Ticket />} />
       </Routes>
     </div>
   );
