@@ -28,6 +28,9 @@ import c1 from "./assets/cutie1.svg";
 import c2 from "./assets/cutie2.svg";
 import hand from "./assets/hand.svg";
 
+import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
+
+
 function App({ anonAadhaarProvider }) {
   const [provider, setProvider] = useState(null);
   const [account, setAccount] = useState(null);
@@ -164,7 +167,11 @@ function App({ anonAadhaarProvider }) {
         />
       )}
 
-      <Dashboard userAddress={account} contract={tokenMaster} />
+      {/* <Dashboard userAddress={account} contract={tokenMaster} /> */}
+
+      <Routes>
+        <Route path="/dashboard" element={<Dashboard userAddress={account} contract={tokenMaster} />} />
+      </Routes>
     </div>
   );
 }
