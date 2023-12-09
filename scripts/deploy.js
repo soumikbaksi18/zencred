@@ -28,7 +28,7 @@ async function main() {
       location: "Bangalore, India"
     },
     {
-      name: "ETH Tokyo",
+      name: "ETHTokyo",
       cost: tokens(1),
       tickets: 125,
       date: "Jun 2",
@@ -36,7 +36,7 @@ async function main() {
       location: "Tokyo, Japan"
     },
     {
-      name: "ETH Privacy Hackathon",
+      name: "ETHPrivacy ",
       cost: tokens(0.25),
       tickets: 200,
       date: "Jun 9",
@@ -52,7 +52,7 @@ async function main() {
       location: "Delhi, India"
     },
     {
-      name: "ETH Global Toronto",
+      name: "ETHToronto",
       cost: tokens(1.5),
       tickets: 125,
       date: "Jun 23",
