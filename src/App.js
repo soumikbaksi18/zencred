@@ -28,6 +28,10 @@ import c1 from "./assets/cutie1.svg";
 import c2 from "./assets/cutie2.svg";
 import hand from "./assets/hand.svg";
 
+import
+
+
+
 function App({ anonAadhaarProvider }) {
   const [provider, setProvider] = useState(null);
   const [account, setAccount] = useState(null);
