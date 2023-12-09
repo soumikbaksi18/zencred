@@ -24,22 +24,22 @@ const Navbar = ({ account, setAccount }) => {
 
         <div className="flex items-center ">
           <a href="" className="">
-            <h1 className="mx-5 text-violet-700 text-base font-light leading-[30.60px]">
+            <h1 className="mx-5 text-violet-700 text-base font-light leading-[30.60px]  text-purple-700">
               About
             </h1>
           </a>
           <a href="/all" className="">
-            <h1 className="mx-5 text-violet-700 text-base font-light leading-[30.60px]">
+            <h1 className="mx-5 text-violet-700 text-base font-light leading-[30.60px]  text-purple-700">
               Events
             </h1>
           </a>
           <a href="/all" className="">
-            <h1 className="mx-5 text-violet-700 text-base font-light leading-[30.60px]">
+            <h1 className="mx-5 text-violet-700 text-base font-light leading-[30.60px]  text-purple-700">
               Rewards
             </h1>
           </a>
           <a href="/all" className="">
-            <h1 className="mx-5 text-violet-700 text-base font-light leading-[30.60px]">
+            <h1 className="mx-5 text-violet-700 text-base font-light leading-[30.60px] text-purple-700">
               Carbon Footprints
             </h1>
           </a>

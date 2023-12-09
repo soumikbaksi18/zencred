@@ -20,12 +20,12 @@ async function main() {
   // List 6 events
   const occasions = [
     {
-      name: "UFC Miami",
+      name: "ETHIndia",
       cost: tokens(3),
       tickets: 0,
       date: "May 31",
       time: "6:00PM EST",
-      location: "Miami-Dade Arena - Miami, FL"
+      location: "Bangalore, India"
     },
     {
       name: "ETH Tokyo",
@@ -44,12 +44,12 @@ async function main() {
       location: "Turkey, Istanbul"
     },
     {
-      name: "Dallas Mavericks vs. San Antonio Spurs",
+      name: "ETHDesign",
       cost: tokens(5),
       tickets: 0,
       date: "Jun 11",
       time: "2:30PM CST",
-      location: "American Airlines Center - Dallas, TX"
+      location: "Delhi, India"
     },
     {
       name: "ETH Global Toronto",

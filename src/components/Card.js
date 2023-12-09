@@ -5,6 +5,7 @@ import map from "../assets/map.svg";
 import calendar from "../assets/Calendar.svg";
 import stars from "../assets/stars.svg";
 import { ethers } from "ethers";
+import EthIndia from "../assets/ETHIndia.svg";
 
 const Card = ({ occasion, toggle, setToggle, setOccasion }) => {
   const togglePop = () => {
@@ -53,7 +54,7 @@ const Card = ({ occasion, toggle, setToggle, setOccasion }) => {
     // </div>
     <>
       <div className="relative mb-60 content-center">
-        <img src="" className="w-[90%] h-[85%] object-cover rounded-lg" />
+        <img src={EthIndia} className="w-[90%] h-[85%] object-cover rounded-lg" />
         <div className="bg-white z-10 py-2 w-[90%]  absolute flex justify-center flex-col rounded-lg shadow-2xl">
           <div className="flex justify-between mx-4 mt-4">
             <p className="text-black text-xl font-semibold font-poppins text-center">

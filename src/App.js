@@ -142,7 +142,7 @@ function App({ anonAadhaarProvider }) {
           </>
         )}
       </div> */}
-      <div className="cards grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="cards grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mx-16 mt-20">
         {occasions.map((occasion, index) => (
           <Card
             occasion={occasion}
@@ -167,7 +167,7 @@ function App({ anonAadhaarProvider }) {
         />
       )}
 
-      {/* <Dashboard userAddress={account} contract={tokenMaster} /> */}
+      <Dashboard userAddress={account} contract={tokenMaster} />
 
       <Routes>
         <Route path="/dashboard" element={<Dashboard userAddress={account} contract={tokenMaster} />} />
