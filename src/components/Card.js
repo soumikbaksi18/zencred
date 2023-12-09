@@ -81,9 +81,27 @@ const Card = ({ occasion, toggle, setToggle, setOccasion }) => {
             </div>
             <div className="flex flex-row ">
               <img src={stars} className="mx-3" />
-              <a href="" className="attend text-sm p-2 px-4">
+              {/* <a href="" className="attend text-sm p-2 px-4">
                 ATTEND
-              </a>
+              </a> */}
+
+              {occasion.tickets.toString() === "0" ? (
+                <button
+                  type="button"
+                  className="attend text-sm p-2 px-4"
+                  disabled
+                >
+                  Sold Out
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className="attend text-sm p-2 px-4"
+                  onClick={() => togglePop()}
+                >
+                  View Seats
+                </button>
+              )}
             </div>
           </div>
         </div>
