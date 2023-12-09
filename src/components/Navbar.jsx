@@ -4,13 +4,28 @@ import logo from "../assets/logo.svg";
 import "../App.css";
 
 const Navbar = ({ account, setAccount }) => {
+  // const connectHandler = async () => {
+  //   const accounts = await window.ethereum.request({
+  //     method: "eth_requestAccounts",
+  //   });
+  //   const account = ethers.utils.getAddress(accounts[0]);
+  //   setAccount(account);
+  // };
   const connectHandler = async () => {
-    const accounts = await window.ethereum.request({
-      method: "eth_requestAccounts",
-    });
-    const account = ethers.utils.getAddress(accounts[0]);
-    setAccount(account);
+    try {
+      const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      });
+
+      if (accounts.length > 0) {
+        const account = ethers.utils.getAddress(accounts[0]);
+        setAccount(account);
+      }
+    } catch (error) {
+      console.error("Error connecting to Ethereum:", error);
+    }
   };
+
   return (
     <>
       <div className="flex justify-between text-white mt-8 mx-20">
@@ -24,22 +39,22 @@ const Navbar = ({ account, setAccount }) => {
 
         <div className="flex items-center ">
           <a href="" className="">
-            <h1 className="mx-5 text-violet-700 text-base font-light leading-[30.60px]  text-purple-700">
+            <h1 className="mx-5 text-violet-700 text-base font-medium leading-[30.60px]  ">
               About
             </h1>
           </a>
           <a href="/all" className="">
-            <h1 className="mx-5 text-violet-700 text-base font-light leading-[30.60px]  text-purple-700">
+            <h1 className="mx-5 text-violet-700 text-base font-medium leading-[30.60px]  ">
               Events
             </h1>
           </a>
           <a href="/dashboard" className="">
-            <h1 className="mx-5 text-violet-700 text-base font-light leading-[30.60px]  text-purple-700">
+            <h1 className="mx-5 text-violet-700 text-base font-medium leading-[30.60px]  ">
               Dashboard
             </h1>
           </a>
           <a href="/carbon" className="">
-            <h1 className="mx-5 text-violet-700 text-base font-light leading-[30.60px] text-purple-700">
+            <h1 className="mx-5 text-violet-700 text-base font-medium leading-[30.60px] ">
               Carbon Footprints
             </h1>
           </a>

@@ -134,7 +134,7 @@ function Dashboard({
         discountEligible={discountEligible}
         setDiscountCoupon={setDiscountCoupon}
       />
-      {console.log("discount eligible ", discountEligible)}
+      {console.log("discount eligible dashboard", discountEligible)}
       {/* <Carbon2></Carbon2> */}
     </div>
   );

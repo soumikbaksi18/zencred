@@ -43,6 +43,9 @@ const SeatChart = ({
         .connect(signer)
         .mint(occasion.id, _seat, { value: occasion.cost });
       await transaction.wait();
+      {
+        console.log("not eligible ", discountEligible);
+      }
     }
     setHasSold(true);
   };

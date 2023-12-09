@@ -179,7 +179,7 @@ function App({ anonAadhaarProvider }) {
                     </div>
                   </div>
                 )} */}
-
+                {console.log("discount eligible app js ", discountEligible)}
                 {toggle && (
                   <SeatChart
                     occasion={occasion}

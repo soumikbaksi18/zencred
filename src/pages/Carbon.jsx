@@ -69,63 +69,74 @@ const Carbon = ({ discountEligible, setDiscountCoupon }) => {
   return (
     <>
       <div className="flex justify-center">
-        <div className="section flex flex-col">
-          <div className="calculator-bg2">
-            <div className="p-6">
-              <h1 className={`p-2 `}>Weight of Cargo</h1>
-              <div className="flex relative">
-                <input
-                  className="input-field p-6 mr-2"
-                  type="number"
-                  value={weightInput}
-                  onChange={handleWeightChange}
-                />
-                <h2 className="flex-end ml-2">Kg</h2>
+        <div class="mx-auto w-full max-w-[550px] mb-20">
+          <div>
+            <div class="-mx-3 flex flex-wrap">
+              <div class="w-full px-3 sm:w-1/2">
+                <div class="mb-5">
+                  <label
+                    for="fName"
+                    class="mb-3 block text-base font-medium text-[#07074D]"
+                  >
+                    Weight of Cargo
+                  </label>
+                  <input
+                    type="number"
+                    name="fName"
+                    id="fName"
+                    value={weightInput}
+                    onChange={handleWeightChange}
+                    placeholder="in Kg"
+                    class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                  />
+                </div>
+              </div>
+              <div class="w-full px-3 sm:w-1/2">
+                <div class="mb-5">
+                  <label
+                    for="lName"
+                    class="mb-3 block text-base font-medium text-[#07074D]"
+                  >
+                    Distance Covered
+                  </label>
+                  <input
+                    type="number"
+                    name="lName"
+                    id="lName"
+                    value={distanceInput}
+                    onChange={handleDistanceChange}
+                    placeholder="Distance in Km"
+                    class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                  />
+                </div>
               </div>
             </div>
 
-            <div className="p-6">
-              <h1 className={` p-2 `}>Distance Covered</h1>
-              <div className="flex relative">
-                <input
-                  className="input-field p-6 mr-2"
-                  type="number"
-                  value={distanceInput}
-                  onChange={handleDistanceChange}
-                />
-                <h2 className="flex-end">Km</h2>
-              </div>
-            </div>
-
-            <div className="p-6 mt-5">
-              <button className="calculate" onClick={handleCalculateClick}>
-                <h3 className={` p-2 `}>Calculate</h3>
+            <div>
+              <button class="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none">
+                Distance Calculation
               </button>
             </div>
-          </div>
-
-          <div>
-            <div className="output mt-10">
-              <div className="output-field flex relative ">
-                <h2 className={` text-lg p-6`}>
-                  Your Carbon offset is:
-                  <p className="text-2xl text-black">
-                    {carbonOffset && <p>{carbonOffset}</p>}
-                  </p>
-                </h2>
-                <h3 className="flex-end ">
-                  Kg
-                </h3>
+            <div>
+              <div className="output mt-4">
+                <div className="output-field flex relative ">
+                  <h2 className={` text-lg `}>
+                    Your Carbon offset is:
+                    <p className="text-2xl text-black">
+                      {carbonOffset && <p>{carbonOffset}Kg</p>}
+                    </p>
+                  </h2>
+                </div>
               </div>
+              {discountCoupon && (
+                <div className="mt-4">
+                  <h3 className="text-green-500">
+                    Congratulations! You've got a discount:
+                  </h3>
+                  <p className="text-2xl">{discountCoupon}</p>
+                </div>
+              )}
             </div>
-            {discountCoupon && (
-              <div className="mt-4">
-                <h3 className="text-green-500">
-                  Congratulations! You've got a discount:
-                </h3>
-                <p className="text-2xl">{discountCoupon}</p>
-              </div>
-            )}
           </div>
         </div>
       </div>
