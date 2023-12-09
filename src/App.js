@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
-import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
+import {
+  Route,
+  Routes,
+  BrowserRouter as Router,
+  Switch,
+} from "react-router-dom";
 import Home from "./pages/Home";
 import Verify from "./pages/Verify";
 import Event from "./pages/Event";
@@ -62,13 +67,21 @@ const App = () => {
         <Navbar account={account} setAccount={setAccount} />
       </div>
       <Routes>
-        <Route path="/" element={<Home occasions={occasions}
-          setOccasion={setOccasion}
-          tokenMaster={tokenMaster}
-          provider={provider}
-          account={account} />} />
+        <Route
+          path="/"
+          element={
+            <Home
+              occasions={occasions}
+              setOccasion={setOccasion}
+              tokenMaster={tokenMaster}
+              provider={provider}
+              account={account}
+            />
+          }
+        />
         <Route path="/verify" element={<Verify />} />
-        <Route path="/event" element={<Event />} />
+
+        <Route path="/event/:eventId" element={<Event />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/carbon" element={<Carbon />} />
       </Routes>

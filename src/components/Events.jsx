@@ -5,26 +5,23 @@ import events from "../Data/Eventdata";
 import map from "../assets/map.svg";
 import calendar from "../assets/Calendar.svg";
 import stars from "../assets/stars.svg";
+import { Link } from "react-router-dom";
 
 const Events = ({ occasions, tokenMaster, provider, account, setOccasion }) => {
   const [activeCategory, setActiveCategory] = useState("");
-  const [allEvents, setAllEvents] = useState(events);
   const [items, setItems] = useState(events);
 
-  const filterItem = (categoryItem) => {
-    if (categoryItem === "all") {
-      setItems(allEvents);
-    } else {
-      const updatedItems = allEvents.filter((curElem) => {
-        return curElem.category === categoryItem;
-      });
-      setItems(updatedItems);
-    }
-  };
+  const [allEvents, setAllEvents] = useState([]);
 
   useEffect(() => {
-    setItems(allEvents);
-  }, [allEvents]);
+    // Fetch events or set occasions directly
+    setAllEvents(occasions);
+    console.log("OCASSAIONS", occasions);
+  }, [occasions]);
+
+  const getOccasionDetails = (eventId) => {
+    return occasions.find((occasion) => occasion.id === eventId) || {};
+  };
 
   return (
     <>
@@ -35,9 +32,8 @@ const Events = ({ occasions, tokenMaster, provider, account, setOccasion }) => {
       <div className={`${styles.paddingX} ${styles.marginX} `}>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {occasions.map((occasion, index) => {
-            // const { id, title, date, location, description, image, price } =
-            //   elem;
-
+            const occasionDetails = getOccasionDetails(occasion.id);
+            console.log(occasionDetails);
             return (
               <div className="relative mb-60 content-center">
                 <img
@@ -65,23 +61,34 @@ const Events = ({ occasions, tokenMaster, provider, account, setOccasion }) => {
                   </div>
 
                   <p className="mt-6 px-4 mt-1 text-[#637381] font-poppins font-medium text-sm  line-clamp-3">
-                    {/* {description} */}
                     desc
                   </p>
 
                   <div className="flex justify-between mt-2 mx-4">
                     <div className="font-poppins font-medium text-lg text-purple-700 flex items-center">
-                      {/* {price} */}
-                      {ethers.utils.formatUnits(
+                      {occasion.price}
+                      {/* {ethers.utils.formatUnits(
                         occasion.cost.toString(),
                         "ether"
-                      )}
+                      )} */}
                     </div>
                     <div className="flex flex-row ">
                       <img src={stars} className="mx-3" />
-                      <a href="" className="attend text-sm p-2 px-4">
+                      {console.log("before sending occa", occasionDetails)}
+                      <Link
+                        to={`/event/${occasion.id}?name=${encodeURIComponent(
+                          occasionDetails.name
+                        )}&location=${encodeURIComponent(
+                          occasionDetails.location
+                        )}&price=${encodeURIComponent(
+                          occasionDetails.price
+                        )}&description=${encodeURIComponent(
+                          occasionDetails.description
+                        )}`}
+                        className="attend text-sm p-2 px-4"
+                      >
                         ATTEND
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
