@@ -11,7 +11,7 @@ module.exports = {
     alfajores: {
       url: "https://alfajores-forno.celo-testnet.org",
       accounts: [
-        `ac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80`,
+        '0x072bfcb659b7c57a8f97a386d21c70052a184978f995c7550b4684c3b44423b4',
       ],
     },
   },
