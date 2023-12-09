@@ -13,7 +13,7 @@ const Navbar = ({ account, setAccount }) => {
   };
   return (
     <>
-      <div className="flex justify-between text-white mt-10 mx-20">
+      <div className="flex justify-between text-white mt-8 mx-20">
         <div className="flex items-center">
           <a href="/" className="">
             <h1 className="ml-24 text-white text-lg font-semibold leading-[30.60px]">

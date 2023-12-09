@@ -38,7 +38,7 @@ const styles = {
   paddingL: "sm:pl-16 pl-6",
   padding: "sm:px-16 px-6 sm:py-12 py-4",
 
-  marginX: "sm:mx-24 mx-4",
+  marginX: "sm:mx-32 mx-4",
   marginL: "sm:ml-16 ml-6",
   marginY: "sm:my-16 my-6",
 
