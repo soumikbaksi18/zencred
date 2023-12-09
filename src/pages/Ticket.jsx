@@ -30,7 +30,6 @@ const Ticket = () => {
           >
             <a className="text-lg font-medium">Chat Rooms</a>
           </div>
-          {/* {showChatbot &&  <Chatbot />} */}
           <div className="h-[350px]"></div>
           
         </div>
