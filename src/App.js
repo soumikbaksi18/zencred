@@ -13,6 +13,7 @@ import Card from "./components/Card";
 import SeatChart from "./components/SeatChart";
 import Dashboard from "./components/Dashboard";
 import Navbar from "./components/Navbar";
+import Ticket from "./pages/Ticket";
 
 // ABIs
 import TokenMaster from "./abis/TokenMaster.json";
@@ -182,6 +183,10 @@ function App({ anonAadhaarProvider }) {
         <Route
           path="/dashboard"
           element={<Dashboard userAddress={account} contract={tokenMaster} />}
+        />
+         <Route
+          path="/ticket"
+          element={<Ticket />}
         />
       </Routes>
     </div>
