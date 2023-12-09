@@ -1,0 +1,18 @@
+.call {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  background: #dfd1fd;
+}
+
+.attend {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  background: #f4f1fd;
+  color: purple;
+}

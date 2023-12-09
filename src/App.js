@@ -12,6 +12,7 @@ import Sort from "./components/Sort";
 import Card from "./components/Card";
 import SeatChart from "./components/SeatChart";
 import Dashboard from "./components/Dashboard";
+import Navbar from "./components/Navbar";
 
 // ABIs
 import TokenMaster from "./abis/TokenMaster.json";
@@ -77,6 +78,8 @@ function App({ anonAadhaarProvider }) {
 
   return (
     <div>
+      <Navbar account={account} setAccount={setAccount} />
+
       <div>
         <div className="hero flex justify-between mt-16 mx-20">
           <div className="w-1/2 ">
@@ -122,27 +125,20 @@ function App({ anonAadhaarProvider }) {
           </div>
         </div>
       </div>
-      <header>
-        <Navigation account={account} setAccount={setAccount} />
 
-        <h2 className="header__title">
-          <strong>Event</strong> Tickets
-        </h2>
-      </header>
       {/* {anonAadhaarProvider} */}
-      <div className="center">
+      {/* <div className="center">
         <LogInWithAnonAadhaar />
         <p>{anonAadhaar?.status}</p>
       </div>
-      <div className="center">
-        {/* Render the proof if generated and valid */}
+      <div className="center"> 
         {anonAadhaar?.status === "logged-in" && (
           <>
             <p>✅ Proof is valid</p>
             <AnonAadhaarProof code={JSON.stringify(anonAadhaar.pcd, null, 2)} />
           </>
         )}
-      </div>
+      </div> */}
       <div className="cards">
         {occasions.map((occasion, index) => (
           <Card
