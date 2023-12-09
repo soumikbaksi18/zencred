@@ -8,6 +8,8 @@ contract TokenMaster is ERC721 {
     address public owner;
     uint256 public totalOccasions;
     uint256 public totalSupply;
+    uint256 public discountThreshold = 100;
+    using SafeMath for uint256;
 
     struct Occasion {
         uint256 id;
@@ -31,6 +33,7 @@ contract TokenMaster is ERC721 {
     mapping(uint256 => mapping(uint256 => address)) public seatTaken;
     mapping(uint256 => uint256[]) seatsTaken;
     mapping(address => Ticket[]) public userTickets;
+    mapping(address => string) public userDiscountCoupons; // Added mapping for user discount coupons
 
     modifier onlyOwner() {
         require(msg.sender == owner);
@@ -65,39 +68,87 @@ contract TokenMaster is ERC721 {
         );
     }
 
+    event OccasionDetails(uint256 id, uint256 cost, uint256 tickets);
+
     function mint(uint256 _id, uint256 _seat) public payable {
-        // Require that _id is not 0 or less than total occasions...
-        require(_id != 0);
-        require(_id <= totalOccasions);
+        // Validate input parameters
+        require(_id != 0, "Invalid occasion ID");
+        require(_id <= totalOccasions, "Occasion ID out of range");
+        require(msg.value > 0, "Invalid value sent");
 
-        // Require that ETH sent is greater than cost...
-        require(msg.value >= occasions[_id].cost);
+        // Get the ticket cost
+        uint256 ticketCost = occasions[_id].cost;
 
-        // Require that the seat is not taken, and the seat exists...
-        require(seatTaken[_id][_seat] == address(0));
-        require(_seat <= occasions[_id].maxTickets);
+        // Apply discount logic if user has a discount coupon
+        if (bytes(userDiscountCoupons[msg.sender]).length > 0) {
+            require(
+                validateDiscountCoupon(userDiscountCoupons[msg.sender]),
+                "Invalid discount coupon"
+            );
+            // Assume a 10% discount for this example
+            uint256 discount = 1;
+            ticketCost = ticketCost.sub(discount);
+        }
 
-        occasions[_id].tickets -= 1; // <-- Update ticket count
+        // Ensure that the sent value is at least the ticket cost
+        require(msg.value >= ticketCost, "Insufficient funds");
 
-        hasBought[_id][msg.sender] = true; // <-- Update buying status
-        seatTaken[_id][_seat] = msg.sender; // <-- Assign seat
+        // Ensure that the seat is not taken, and the seat exists
+        require(seatTaken[_id][_seat] == address(0), "Seat already taken");
+        require(_seat <= occasions[_id].maxTickets, "Seat out of range");
 
-        seatsTaken[_id].push(_seat); // <-- Update seats currently taken
+        // Update ticket count and user status
+        occasions[_id].tickets -= 1;
+        hasBought[_id][msg.sender] = true;
 
+        // Assign seat and update seats currently taken
+        seatTaken[_id][_seat] = msg.sender;
+        seatsTaken[_id].push(_seat);
+
+        // Mint a new token
         totalSupply++;
-
         Ticket memory newTicket = Ticket({
             id: totalSupply,
             occasionId: _id,
             seat: _seat
         });
         userTickets[msg.sender].push(newTicket);
-
         _safeMint(msg.sender, totalSupply);
+        emit OccasionDetails(_id, occasions[_id].cost, occasions[_id].tickets);
+    }
+
+    function applyDiscountCoupon(string memory coupon) public {
+        require(
+            bytes(userDiscountCoupons[msg.sender]).length == 0,
+            "Discount coupon already applied"
+        );
+        require(validateDiscountCoupon(coupon), "Invalid discount coupon");
+        userDiscountCoupons[msg.sender] = coupon;
+    }
+
+    function validateDiscountCoupon(
+        string memory coupon
+    ) public pure returns (bool) {
+        return
+            keccak256(abi.encodePacked(coupon)) ==
+            keccak256(abi.encodePacked("CARB7772618"));
     }
 
     function getOccasion(uint256 _id) public view returns (Occasion memory) {
-        return occasions[_id];
+        Occasion memory occasion = occasions[_id];
+
+        // Calculate the ticket cost dynamically based on the discount coupon
+        if (bytes(userDiscountCoupons[msg.sender]).length > 0) {
+            require(
+                validateDiscountCoupon(userDiscountCoupons[msg.sender]),
+                "Invalid discount coupon"
+            );
+            // Assume a 10% discount for this example
+            uint256 discount = (occasion.cost * 10) / 100;
+            occasion.cost = occasion.cost - discount;
+        }
+
+        return occasion;
     }
 
     function getUserTickets(

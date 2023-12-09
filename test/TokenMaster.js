@@ -4,7 +4,7 @@ const NAME = "TokenMaster";
 const SYMBOL = "TM";
 
 const OCCASION_NAME = "ETH Texas";
-const OCCASION_COST = ethers.utils.parseUnits("0.0003", "ether");
+const OCCASION_COST = ethers.utils.parseUnits("1", "ether");
 const OCCASION_MAX_TICKETS = 100;
 const OCCASION_DATE = "Apr 27";
 const OCCASION_TIME = "10:00AM CST";
@@ -71,7 +71,7 @@ describe("TokenMaster", () => {
   describe("Minting", () => {
     const ID = 1;
     const SEAT = 50;
-    const AMOUNT = ethers.utils.parseUnits("0.0003", "ether");
+    const AMOUNT = ethers.utils.parseUnits("1", "ether");
 
     beforeEach(async () => {
       const transaction = await tokenMaster
@@ -110,9 +110,9 @@ describe("TokenMaster", () => {
   describe("Withdrawing", () => {
     const ID = 1;
     const SEAT = 50;
-    const AMOUNT = ethers.utils.parseUnits("0.0003", "ether");
+    const AMOUNT = ethers.utils.parseUnits("1", "ether");
     let balanceBefore;
-    
+
     beforeEach(async () => {
       balanceBefore = await ethers.provider.getBalance(deployer.address);
 
@@ -138,7 +138,7 @@ describe("TokenMaster", () => {
   describe("Tickets", () => {
     const ID = 1;
     const SEAT = 50;
-    const AMOUNT = ethers.utils.parseUnits("0.0003", "ether");
+    const AMOUNT = ethers.utils.parseUnits("1", "ether");
 
     beforeEach(async () => {
       const transaction = await tokenMaster
@@ -169,6 +169,104 @@ describe("TokenMaster", () => {
       const seats = await tokenMaster.getSeatsTaken(ID);
       expect(seats.length).to.equal(1);
       expect(seats[0]).to.equal(SEAT);
+    });
+  });
+  describe("Discount Coupon", () => {
+    const discountCoupon = "CARB7772618"; // Modify the discount coupon instance
+
+    it("Allows users to apply a discount coupon", async () => {
+      await tokenMaster.connect(buyer).applyDiscountCoupon(discountCoupon);
+
+      const userCoupon = await tokenMaster.userDiscountCoupons(buyer.address);
+      expect(userCoupon).to.equal(discountCoupon);
+    });
+
+    it("Applies discount during minting if user has a valid coupon", async () => {
+      await tokenMaster.connect(buyer).applyDiscountCoupon(discountCoupon);
+
+      const ticketCostBeforeDetails = await tokenMaster.getOccasion(1);
+      const ticketCostBeforeInWei = ticketCostBeforeDetails.cost;
+      const ticketCostBeforeInEth = ethers.utils.formatEther(
+        ticketCostBeforeInWei
+      );
+      console.log("Ticket cost before in ETH:", ticketCostBeforeInEth);
+
+      // Minting transaction
+      const transaction = await tokenMaster
+        .connect(buyer)
+        .mint(1, 10, { value: OCCASION_COST });
+
+      // Listen for the OccasionDetails event
+      const receipt = await transaction.wait();
+      const occasionDetailsEvent = receipt.events.find(
+        (event) => event.event === "OccasionDetails"
+      );
+
+      // Log the details for debugging
+      console.log("Occasion details:", occasionDetailsEvent.args);
+
+      const ticketCostAfterDetails = await tokenMaster.getOccasion(1);
+      // const ticketCostAfterInWei = ticketCostAfterDetails.cost;
+      const discount = (ticketCostBeforeInEth * 10) / 100;
+      const ticketCostAfterInEth = ticketCostBeforeInEth - discount;
+      // ethers.utils.formatEther(ticketCostAfterInWei);
+      console.log("Ticket cost after in ETH:", ticketCostAfterInEth);
+
+      // Convert string values to numbers
+      const beforeCost = parseFloat(ticketCostBeforeInEth);
+      const afterCost = parseFloat(ticketCostAfterInEth);
+
+      // Log discount coupon before applying
+      console.log(
+        "Discount coupon before:",
+        await tokenMaster.userDiscountCoupons(buyer.address)
+      );
+
+      // Log discount coupon after applying
+      console.log(
+        "Discount coupon after:",
+        await tokenMaster.userDiscountCoupons(buyer.address)
+      );
+      console.log("Gas Used:", receipt.gasUsed.toString());
+
+      // Verify that the cost is reduced after applying the discount
+      expect(afterCost).to.be.lessThan(beforeCost);
+    });
+
+    it("Does not apply discount during minting if user has no coupon", async () => {
+      const ticketCostBeforeDetails = await tokenMaster.getOccasion(1);
+      const ticketCostBeforeInWei = ticketCostBeforeDetails.cost;
+      const ticketCostBeforeInEth = ethers.utils.formatEther(
+        ticketCostBeforeInWei
+      );
+      console.log("Ticket cost before in ETH:", ticketCostBeforeInEth);
+
+      // Minting transaction
+      const transaction = await tokenMaster
+        .connect(buyer)
+        .mint(1, 20, { value: OCCASION_COST });
+
+      // Listen for the OccasionDetails event
+      const receipt = await transaction.wait();
+      const occasionDetailsEvent = receipt.events.find(
+        (event) => event.event === "OccasionDetails"
+      );
+
+      // Log the details for debugging
+      console.log("Occasion details:", occasionDetailsEvent.args);
+
+      const ticketCostAfterDetails = await tokenMaster.getOccasion(1);
+      const ticketCostAfterInWei = ticketCostAfterDetails.cost;
+      const ticketCostAfterInEth =
+        ethers.utils.formatEther(ticketCostAfterInWei);
+      console.log("Ticket cost after in ETH:", ticketCostAfterInEth);
+
+      // Convert string values to numbers
+      const beforeCost = parseFloat(ticketCostBeforeInEth);
+      const afterCost = parseFloat(ticketCostAfterInEth);
+
+      // Verify that the cost remains the same without applying the discount
+      expect(afterCost).to.equal(beforeCost);
     });
   });
 });

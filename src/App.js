@@ -7,8 +7,6 @@ import {
 } from "anon-aadhaar-react";
 
 // Components
-import Navigation from "./components/Navigation";
-import Sort from "./components/Sort";
 import Card from "./components/Card";
 import SeatChart from "./components/SeatChart";
 import Dashboard from "./components/Dashboard";
@@ -32,7 +30,6 @@ import hand from "./assets/hand.svg";
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import Carbon2 from "./pages/Carbon2";
 
-
 function App({ anonAadhaarProvider }) {
   const [provider, setProvider] = useState(null);
   const [account, setAccount] = useState(null);
@@ -42,6 +39,7 @@ function App({ anonAadhaarProvider }) {
 
   const [occasion, setOccasion] = useState({});
   const [toggle, setToggle] = useState(false);
+  const [discountEligible, setDiscountCoupon] = useState(0);
 
   const [anonAadhaar] = useAnonAadhaar();
 
@@ -155,7 +153,7 @@ function App({ anonAadhaarProvider }) {
                   ))}
                 </div>
 
-                {toggle && (
+                {/* {toggle && (
                   <div className="anon">
                     {anonAadhaarProvider}
                     <div className="center">
@@ -180,6 +178,16 @@ function App({ anonAadhaarProvider }) {
                       )}
                     </div>
                   </div>
+                )} */}
+
+                {toggle && (
+                  <SeatChart
+                    occasion={occasion}
+                    tokenMaster={tokenMaster}
+                    provider={provider}
+                    setToggle={setToggle}
+                    discountEligible={discountEligible}
+                  />
                 )}
               </div>
             </>
@@ -187,17 +195,17 @@ function App({ anonAadhaarProvider }) {
         />
         <Route
           path="/dashboard"
-          element={<Dashboard userAddress={account} contract={tokenMaster} />}
+          element={
+            <Dashboard
+              userAddress={account}
+              contract={tokenMaster}
+              discountEligible={discountEligible}
+              setDiscountCoupon={setDiscountCoupon}
+            />
+          }
         />
-        <Route
-          path="/carbon"
-          element={<Carbon />}
-        />
-        <Route
-          path="/carbon2"
-          element={<Carbon2 />}
-        />
-        
+        {/* <Route path="/carbon" element={<Carbon />} />
+        <Route path="/carbon2" element={<Carbon2 />} /> */}
       </Routes>
     </div>
   );
