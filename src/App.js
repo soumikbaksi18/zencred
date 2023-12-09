@@ -112,7 +112,7 @@ function App({ anonAadhaarProvider }) {
 
                       <div className="flex justify-center pt-20">
                         <div className="call w-48 py-2 mr-8">
-                          <h1 className="mx-5 text-black text-xl font-bold ">
+                          <h1 className="mx-5 text-black text-lg font-bold ">
                             Book Events 🗓️️
                           </h1>
                         </div>
