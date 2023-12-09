@@ -121,16 +121,16 @@ function App({ anonAadhaarProvider }) {
                         </div>
                       </div>
                     </div>
-                    <div className="w-1/2">
-                      <div className="flex justify-center pb-8">
-                        <img src={hero1} className="w-9/10" />
+                    <div className="w-1/2 px-20">
+                      <div className="flex justify-center pb-2">
+                        <img src={hero1} className="w-full" />
                       </div>
-                      <div className="flex justify-around mx-2">
+                      <div className="flex justify-between mx-2">
                         <div className="">
-                          <img src={hero2} className="w-9/10" />
+                          <img src={hero2} className="" />
                         </div>
                         <div className="">
-                          <img src={hero3} className="w-9/10" />
+                          <img src={hero3} className="" />
                         </div>
                       </div>
                     </div>

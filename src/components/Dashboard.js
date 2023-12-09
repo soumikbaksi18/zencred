@@ -12,6 +12,7 @@ function Dashboard({
 }) {
   const [userTickets, setUserTickets] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedOption, setSelectedOption] = useState("tickets");
   const [ticketDetails, setTicketDetails] = useState([]);
 
   useEffect(() => {
@@ -49,9 +50,6 @@ function Dashboard({
               userAddress,
               ticket.id
             );
-            {
-              console.log("This is my Ticket Object : ", ticket);
-            }
             occasion = await contract.getOccasion(occasionId);
           } catch (error) {
             console.error(
@@ -97,12 +95,6 @@ function Dashboard({
                   </div>
                 </div>
               </div>
-              {/* <div key={id} className="flex justify-between bg-blue-100"
-          >
-            <div>TICKET ID - {id.toString()}</div>
-            <div>Occasion: {occasion.date}</div>
-            <div>Seat:{seat.toString()}</div>
-            </div> */}
             </>
           );
         });
@@ -119,23 +111,65 @@ function Dashboard({
     }
   }, [userAddress, contract, userTickets]);
 
+  const renderOption = () => {
+    switch (selectedOption) {
+      case "tickets":
+        return (
+          <div className="">
+            <h2 className="flex justify-center text-3xl font-semibold mt-8">
+              Your Tickets
+            </h2>
+            <br />
+            <div className="grid grid-cols-3">{ticketDetails}</div>
+          </div>
+        );
+      case "carbon":
+        return (
+          <Carbon
+            discountEligible={discountEligible}
+            setDiscountCoupon={setDiscountCoupon}
+          />
+        );
+      case "carbon2":
+        return <Carbon2 />;
+      default:
+        return null;
+    }
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div>
-      <h2 className="flex justify-center text-3xl font-semibold mt-8">
-        Your Tickets
-      </h2>
-      <div className="grid grid-cols-3">{ticketDetails}</div>
-      <br />
-      <Carbon
-        discountEligible={discountEligible}
-        setDiscountCoupon={setDiscountCoupon}
-      />
-      {console.log("discount eligible dashboard", discountEligible)}
-      {/* <Carbon2></Carbon2> */}
+    <div className="flex mx-10   mt-10">
+      <div className="flex flex-col pr-20 mb-4  ">
+        <button
+          className={`mx-2 py-2 px-20 ${
+            selectedOption === "tickets" && "bg-blue-500 text-white rounded-xl"
+          }`}
+          onClick={() => setSelectedOption("tickets")}
+        >
+          Tickets
+        </button>
+        <button
+          className={`mx-2 py-2 px-20 ${
+            selectedOption === "carbon" && "bg-blue-500 text-white rounded-xl"
+          }`}
+          onClick={() => setSelectedOption("carbon")}
+        >
+          Carbon
+        </button>
+        <button
+          className={`mx-2 py-2 px-20 ${
+            selectedOption === "carbon2" && "bg-blue-500 text-white rounded-xl"
+          }`}
+          onClick={() => setSelectedOption("carbon2")}
+        >
+          Carbon2
+        </button>
+      </div>
+      {renderOption()}
     </div>
   );
 }
