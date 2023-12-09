@@ -139,7 +139,7 @@ function App({ anonAadhaarProvider }) {
           </>
         )}
       </div> */}
-      <div className="cards">
+      <div className="cards grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {occasions.map((occasion, index) => (
           <Card
             occasion={occasion}
