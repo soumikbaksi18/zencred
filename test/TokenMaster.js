@@ -4,7 +4,7 @@ const NAME = "TokenMaster";
 const SYMBOL = "TM";
 
 const OCCASION_NAME = "ETH Texas";
-const OCCASION_COST = ethers.utils.parseUnits("1", "ether");
+const OCCASION_COST = ethers.utils.parseUnits("0.0003", "ether");
 const OCCASION_MAX_TICKETS = 100;
 const OCCASION_DATE = "Apr 27";
 const OCCASION_TIME = "10:00AM CST";
@@ -71,7 +71,7 @@ describe("TokenMaster", () => {
   describe("Minting", () => {
     const ID = 1;
     const SEAT = 50;
-    const AMOUNT = ethers.utils.parseUnits("1", "ether");
+    const AMOUNT = ethers.utils.parseUnits("0.0003", "ether");
 
     beforeEach(async () => {
       const transaction = await tokenMaster
@@ -110,9 +110,9 @@ describe("TokenMaster", () => {
   describe("Withdrawing", () => {
     const ID = 1;
     const SEAT = 50;
-    const AMOUNT = ethers.utils.parseUnits("1", "ether");
+    const AMOUNT = ethers.utils.parseUnits("0.0003", "ether");
     let balanceBefore;
-
+    
     beforeEach(async () => {
       balanceBefore = await ethers.provider.getBalance(deployer.address);
 
@@ -138,7 +138,7 @@ describe("TokenMaster", () => {
   describe("Tickets", () => {
     const ID = 1;
     const SEAT = 50;
-    const AMOUNT = ethers.utils.parseUnits("1", "ether");
+    const AMOUNT = ethers.utils.parseUnits("0.0003", "ether");
 
     beforeEach(async () => {
       const transaction = await tokenMaster
