@@ -30,7 +30,6 @@ import hand from "./assets/hand.svg";
 
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 
-
 function App({ anonAadhaarProvider }) {
   const [provider, setProvider] = useState(null);
   const [account, setAccount] = useState(null);
@@ -83,94 +82,107 @@ function App({ anonAadhaarProvider }) {
     <div>
       <Navbar account={account} setAccount={setAccount} />
 
-      <div>
-        <div className="hero flex justify-between mt-16 mx-20">
-          <div className="w-1/2 ">
-            <div className="flex justify-center my-2">
-              <img src={c1} className="w-36 mx-5 pt-3" />
-              <h1 className="text-8xl font-bold">Wherever</h1>
-            </div>
-            <h1 className="text-8xl font-bold flex justify-center my-2">
-              You Go, Let's
-            </h1>
-            <div className="flex justify-center my-2">
-              <h1 className="text-8xl font-bold">Make It</h1>
-              <img src={c2} className="w-48 mx-5 pt-3" />
-            </div>
-            <div className="flex justify-center my-2">
-              <h1 className="text-8xl font-bold">Happen</h1>
-              <img src={hand} className="w-28 mx-5" />
-            </div>
-
-            <div className="flex justify-center pt-20">
-              <div className="call w-48 py-2 mr-8">
-                <h1 className="mx-5 text-black text-xl font-bold ">
-                  Book Events 🗓️️
-                </h1>
-              </div>
-              <div className="mx-5 text-black text-xl font-bold flex items-center ml-8">
-                <u> Reedem Carbon Coupon💚</u>
-              </div>
-            </div>
-          </div>
-          <div className="w-1/2">
-            <div className="flex justify-center pb-8">
-              <img src={hero1} className="w-9/10" />
-            </div>
-            <div className="flex justify-around mx-2">
-              <div className="">
-                <img src={hero2} className="w-9/10" />
-              </div>
-              <div className="">
-                <img src={hero3} className="w-9/10" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* {anonAadhaarProvider} */}
-      {/* <div className="center">
-        <LogInWithAnonAadhaar />
-        <p>{anonAadhaar?.status}</p>
-      </div>
-      <div className="center"> 
-        {anonAadhaar?.status === "logged-in" && (
-          <>
-            <p>✅ Proof is valid</p>
-            <AnonAadhaarProof code={JSON.stringify(anonAadhaar.pcd, null, 2)} />
-          </>
-        )}
-      </div> */}
-      <div className="cards grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {occasions.map((occasion, index) => (
-          <Card
-            occasion={occasion}
-            id={index + 1}
-            tokenMaster={tokenMaster}
-            provider={provider}
-            account={account}
-            toggle={toggle}
-            setToggle={setToggle}
-            setOccasion={setOccasion}
-            key={index}
-          />
-        ))}
-      </div>
-
-      {toggle && (
-        <SeatChart
-          occasion={occasion}
-          tokenMaster={tokenMaster}
-          provider={provider}
-          setToggle={setToggle}
-        />
-      )}
-
       {/* <Dashboard userAddress={account} contract={tokenMaster} /> */}
 
       <Routes>
-        <Route path="/dashboard" element={<Dashboard userAddress={account} contract={tokenMaster} />} />
+        <Route
+          path="/"
+          element={
+            <>
+              <div className="home">
+                <div>
+                  <div className="hero flex justify-between mt-16 mx-20">
+                    <div className="w-1/2 ">
+                      <div className="flex justify-center my-2">
+                        <img src={c1} className="w-36 mx-5 pt-3" />
+                        <h1 className="text-8xl font-bold">Wherever</h1>
+                      </div>
+                      <h1 className="text-8xl font-bold flex justify-center my-2">
+                        You Go, Let's
+                      </h1>
+                      <div className="flex justify-center my-2">
+                        <h1 className="text-8xl font-bold">Make It</h1>
+                        <img src={c2} className="w-48 mx-5 pt-3" />
+                      </div>
+                      <div className="flex justify-center my-2">
+                        <h1 className="text-8xl font-bold">Happen</h1>
+                        <img src={hand} className="w-28 mx-5" />
+                      </div>
+
+                      <div className="flex justify-center pt-20">
+                        <div className="call w-48 py-2 mr-8">
+                          <h1 className="mx-5 text-black text-xl font-bold ">
+                            Book Events 🗓️️
+                          </h1>
+                        </div>
+                        <div className="mx-5 text-black text-xl font-bold flex items-center ml-8">
+                          <u> Reedem Carbon Coupon💚</u>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="w-1/2">
+                      <div className="flex justify-center pb-8">
+                        <img src={hero1} className="w-9/10" />
+                      </div>
+                      <div className="flex justify-around mx-2">
+                        <div className="">
+                          <img src={hero2} className="w-9/10" />
+                        </div>
+                        <div className="">
+                          <img src={hero3} className="w-9/10" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {anonAadhaarProvider}
+                <div className="center">
+                  <LogInWithAnonAadhaar />
+                  <p>{anonAadhaar?.status}</p>
+                </div>
+                <div className="center">
+                  {anonAadhaar?.status === "logged-in" && (
+                    <>
+                      <p>✅ Proof is valid</p>
+                      <AnonAadhaarProof
+                        code={JSON.stringify(anonAadhaar.pcd, null, 2)}
+                      />
+                    </>
+                  )}
+                </div>
+                <div className="cards grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {occasions.map((occasion, index) => (
+                    <Card
+                      occasion={occasion}
+                      id={index + 1}
+                      tokenMaster={tokenMaster}
+                      provider={provider}
+                      account={account}
+                      toggle={toggle}
+                      setToggle={setToggle}
+                      setOccasion={setOccasion}
+                      key={index}
+                    />
+                  ))}
+                </div>
+
+                {toggle && (
+                  <SeatChart
+                    occasion={occasion}
+                    tokenMaster={tokenMaster}
+                    provider={provider}
+                    setToggle={setToggle}
+                  />
+                )}
+              </div>
+            </>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={<Dashboard userAddress={account} contract={tokenMaster} />}
+        />
       </Routes>
     </div>
   );
