@@ -8,10 +8,10 @@ module.exports = {
     artifacts: "./src",
   },
   networks: {
-    zkEVM: {
-      url: `https://polygonzkevm-testnet.g.alchemy.com/v2/AkOEotTfIJF5Zgz6gNRH4xna1lApnlaK`,
+    alfajores: {
+      url: "https://alfajores-forno.celo-testnet.org",
       accounts: [
-        `0x39f756447f97315592c96b289aa50d6b379d82d8011aa19b90ac053c21301a6c`,
+        `ac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80`,
       ],
     },
   },
