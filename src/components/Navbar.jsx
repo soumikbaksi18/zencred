@@ -33,9 +33,9 @@ const Navbar = ({ account, setAccount }) => {
               Events
             </h1>
           </a>
-          <a href="/all" className="">
+          <a href="/dashboard" className="">
             <h1 className="mx-5 text-violet-700 text-base font-light leading-[30.60px]  text-purple-700">
-              Rewards
+              Dashboard
             </h1>
           </a>
           <a href="/all" className="">
