@@ -1,4 +1,4 @@
-# Tokenmaster
+# ZenCred
 
 ## Technology Stack & Tools
 
