@@ -1,8 +1,8 @@
 const hre = require("hardhat")
 
 const tokens = (n) => {
-  return ethers.utils.parseUnits(n.toString(), 'ether')
-}
+  return ethers.utils.parseUnits(n.toString(), 18)
+ }
 
 async function main() {
   // Setup accounts & variables
@@ -21,7 +21,7 @@ async function main() {
   const occasions = [
     {
       name: "ETHIndia",
-      cost: tokens(3),
+      cost: tokens(0.0001),
       tickets: 0,
       date: "May 31",
       time: "6:00PM EST",
@@ -29,7 +29,7 @@ async function main() {
     },
     {
       name: "ETHTokyo",
-      cost: tokens(1),
+      cost: tokens(0.0001),
       tickets: 125,
       date: "Jun 2",
       time: "1:00PM JST",
@@ -37,7 +37,7 @@ async function main() {
     },
     {
       name: "ETHPrivacy ",
-      cost: tokens(0.25),
+      cost: tokens(0.00004),
       tickets: 200,
       date: "Jun 9",
       time: "10:00AM TRT",
@@ -45,7 +45,7 @@ async function main() {
     },
     {
       name: "ETHDesign",
-      cost: tokens(5),
+      cost: tokens(0.0003),
       tickets: 0,
       date: "Jun 11",
       time: "2:30PM CST",
@@ -53,7 +53,7 @@ async function main() {
     },
     {
       name: "ETHToronto",
-      cost: tokens(1.5),
+      cost: tokens(0.0002),
       tickets: 125,
       date: "Jun 23",
       time: "11:00AM EST",
