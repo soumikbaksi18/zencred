@@ -38,9 +38,13 @@ const styles = {
   paddingL: "sm:pl-16 pl-6",
   padding: "sm:px-16 px-6 sm:py-12 py-4",
 
-  marginX: "sm:mx-24 mx-4",
+  marginX: "sm:mx-32 mx-4",
   marginL: "sm:ml-16 ml-6",
   marginY: "sm:my-16 my-6",
+
+  texts1: " text-black font-semibold text-lg",
+  texts2: " text-white font-semibold text-lg",
+  texts3: "text-gray-400 font-semibold text-lg ",
 
   tooltip:
     " focus:shadow-lg focus:outline-none active:shadow-lg transition duration-150 ease-in-out",
