@@ -1,4 +1,5 @@
 # ZenCred
+![photo_2023-12-10_08-57-58](https://github.com/soumikbaksi18/zencred/assets/52580094/930aeaf0-6d2f-4d51-8f07-6c777b69e436)
 
 ## Technology Stack & Tools
 
@@ -15,6 +16,7 @@
 
 ## Setting Up
 ### 1. Clone/Download the Repository
+
 
 ### 2. Install Dependencies:
 `$ npm install`
