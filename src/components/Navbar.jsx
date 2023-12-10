@@ -1,6 +1,6 @@
 import React from "react";
 import { ethers } from "ethers";
-import logo from "../assets/logo.svg";
+import logo from "../assets/Logo.jpg";
 import "../App.css";
 
 const Navbar = ({ account, setAccount }) => {
